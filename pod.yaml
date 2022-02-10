@@ -4,7 +4,6 @@ metadata:
    name: mypod
    labels:
       app: myapp
-      env: dev
 spec:
    containers:
    - name: con1
@@ -22,7 +21,7 @@ spec:
        exec:
         command:
         - cat 
-        - /var/www/html/index.php123
+        - /var/www/html/index.php
        initialDelaySeconds: 20
        periodSeconds: 5
    - name: con2

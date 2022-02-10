@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+   name: myrs
+spec:
+   replicas: 3
+   selector:
+      matchExpressions:
+      - key: app
+        operator: In
+        values: [myapp]
+      - key: env
+        operator: NotIn # exist , to check only key
+        values: [dev] #comment this incase want to check only key
+      - key: env
+        operator: Exists 
+
+   template:
+      metadata:
+         labels:
+           app: myapp
+           env: qa
+      spec:
+         containers:
+         - name: con1
+           image: nginx:latest
+           ports:
+           - containerPort: 80
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: myrs-svc
+spec:
+   type: NodePort
+   selector:
+      app: myapp
+   ports:
+   - port: 80
+     nodePort: 30125
+
