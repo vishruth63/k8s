@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: mypod-host-vol
+   labels:
+      app: myapp
+spec:
+   volumes:
+   - name: myvol
+     hostPath:
+       path: /mydata-123
+   containers:
+   - name: con1
+     image: httpd:latest
+     ports:
+     - containerPort: 80
+     volumeMounts:
+     - name: myvol
+       mountPath: /data
+   - name: con2
+     image: tomcat:latest
+     ports:
+     - containerPort: 3306
+     volumeMounts:
+     - name: myvol
+       mountPath: /mylogs
+
+
+

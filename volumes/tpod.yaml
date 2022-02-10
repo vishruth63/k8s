@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: tpod
+  name: tpod
+spec:
+  volumes:
+  - name: myvol
+    persistentVolumeClaim:
+      claimName: mypvc
+  containers:
+  - image: nginx:latest
+    name: tpod
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: myvol
+      mountPath: /data
