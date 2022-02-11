@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: test-job
+spec:
+  completions: 10
+  parallelism: 2
+  template:
+    spec:
+      containers:
+      - name: con1
+        image: alpine:latest
+        command: ["echo","Hello world"]
+      restartPolicy: Never
+
+
+
